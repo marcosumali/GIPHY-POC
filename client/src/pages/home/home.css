@@ -53,3 +53,21 @@
 .Image:hover + .Image-heart-opaque-border > img  { 
   display: block;
 }
+
+.Search-error {
+  font-size: 16px;
+}
+
+/* ------------------------------------------------------ Mobile CSS ------------------------------------------------------ */
+@media only screen and (min-width: 577px) and (max-width: 991px) {
+  .Search-error {
+    font-size: 14px;
+  }
+}
+
+/* ------------------------------------------------------ Mobile CSS ------------------------------------------------------ */
+@media only screen and (max-width: 576px) {
+  .Search-error {
+    font-size: 12px;
+  }
+}

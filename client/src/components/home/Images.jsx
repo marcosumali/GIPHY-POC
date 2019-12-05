@@ -19,13 +19,15 @@ class Images extends Component {
         {
           images.map((image, index) => {
             return (
-              <Col lg={3} key={'image' + index}>
+              <Col xs={12} sm={4} lg={3} key={'image' + index}>
                 <div className="Container-image">
-                  <div 
-                    className="Image-border Image Center-cropped" 
-                    style={{ backgroundImage: `url(${image.images.original.url})` }}
-                    onClick={() => handleImageFavourites(image.id) }
-                  >
+                  <div className="Image-line">
+                    <div
+                      className="Image-border Image Center-cropped" 
+                      style={{ backgroundImage: `url(${image.images.original.url})` }}
+                      onClick={() => handleImageFavourites(image.id) }
+                    >
+                    </div>
                   </div>
                   <div className="Position-bottom-right">
                     {

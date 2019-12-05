@@ -42,7 +42,7 @@ class HomePage extends Component {
           <Col xs={12}>
             {
               images.length <= 0 ?
-              <div>No searched images found.</div>
+              <div className="Search-error">No searched images found.</div>
               :
               <SearchImages />
 
@@ -65,7 +65,7 @@ class HomePage extends Component {
                 className="Container-nowrap-center"
                 variant="primary"
               >
-                <LoadingSvg width="36px" height="36px" color="#ffffff"/>
+                <LoadingSvg width="24px" height="24px" color="#ffffff"/>
               </Button>
               :
               <div></div>
