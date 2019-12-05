@@ -65,7 +65,7 @@ class HomePage extends Component {
                 className="Container-nowrap-center"
                 variant="primary"
               >
-                <LoadingSvg width="24px" height="24px" color="#ffffff"/>
+                <LoadingSvg width="28px" height="28px" color="#ffffff"/>
               </Button>
               :
               <div></div>
