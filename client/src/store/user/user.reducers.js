@@ -5,6 +5,7 @@ let initialState = {
   isLoadingImage: false,
   favImages: [],
   isFavImageLoading: true,
+  isFetchImageLoading: false,
 }
 
 const userDataList = (state = { ...initialState }, action) => {
@@ -38,6 +39,11 @@ const userDataList = (state = { ...initialState }, action) => {
       return ({
         ...state,
         isFavImageLoading: action.payload,
+      })
+    case 'SET_FETCH_MORE_IMAGES_LOADING_STATUS':
+      return ({
+        ...state,
+        isFetchImageLoading: action.payload,
       })
     default:
       return state;

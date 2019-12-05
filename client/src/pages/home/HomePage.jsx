@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
-  getImageFavourites
+  getImageFavourites,
+  fetchMoreGiphyImage,
 } from '../../store/user/user.actions';
 import './home.css';
 import '../../assets/css/bootstrap/boot.tab.css';
 import '../../assets/css/bootstrap/boot.form.css';
+import '../../assets/css/bootstrap/boot.button.css';
 import SearchForm from '../../components/home/SearchForm';
 import SearchImages from '../../components/home/SearchImages';
+import LoadingSvg from '../../components/svg/Loading';
 
 class HomePage extends Component {
   componentDidMount() {
@@ -21,6 +24,12 @@ class HomePage extends Component {
   }
 
   render() {
+    let {
+      images,
+      fetchMoreGiphyImage,
+      searchInput,
+      isFetchLoading,
+    } = this.props
     // console.log('from home', this.props)
     return (
       <Container>
@@ -31,7 +40,36 @@ class HomePage extends Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <SearchImages />
+            {
+              images.length <= 0 ?
+              <div>No searched images found.</div>
+              :
+              <SearchImages />
+
+            }
+          </Col>
+        </Row>
+        <Row style={{ marginTop: '1em' }}>
+          <Col xs={12} className="Container-nowrap-center">
+            {
+              images.length > 0 && !isFetchLoading ?
+              <Button 
+                onClick={ (e) => fetchMoreGiphyImage(e, searchInput, images)  }
+                variant="primary"
+              >
+                Fetch More
+              </Button>
+              :
+              images.length > 0 && isFetchLoading ?
+              <Button 
+                className="Container-nowrap-center"
+                variant="primary"
+              >
+                <LoadingSvg width="36px" height="36px" color="#ffffff"/>
+              </Button>
+              :
+              <div></div>
+            }
           </Col>
         </Row>
       </Container>
@@ -42,11 +80,15 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    searchInput: state.user.searchImages,
+    images: state.user.giphyImages,
+    isFetchLoading: state.user.isFetchImageLoading,
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getImageFavourites,
+  fetchMoreGiphyImage,
 }, dispatch)
 
 

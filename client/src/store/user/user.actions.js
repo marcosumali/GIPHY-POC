@@ -134,6 +134,35 @@ const setImagesFavLoadingStatus = (data) => {
   }
 }
 
+// To get image favourites from GIPHY APIs
+export const fetchMoreGiphyImage = (e, searchInput, images) => {
+  return (dispatch) => { 
+    e.preventDefault()
+    dispatch(setFetchMoreImagesLoadingStatus(true))
+
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=JPj9Ot5N6th4djaq4QL33fcdglVU5a37&limit=8&offset=${images.length}`)
+      .then(response => {
+        // console.log(response)
+        let newImages = [
+          ...images,
+          ...response.data.data
+        ]
+        dispatch(setFetchMoreImagesLoadingStatus(false))
+        dispatch(setGiphyImages(newImages))
+      })
+      .catch(err => {
+        console.log('ERROR: Fetch More Giphy Images', err)
+      })
+  }
+}
+
+// Reducer: to set image loading status
+const setFetchMoreImagesLoadingStatus = (data) => {
+  return {
+    type: 'SET_FETCH_MORE_IMAGES_LOADING_STATUS',
+    payload: data
+  }
+}
 
 
 

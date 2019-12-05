@@ -1,0 +1,4 @@
+.btn-primary {
+  background-color: var(--main-bid) !important;
+  border-color: var(--main-bid) !important;
+}
