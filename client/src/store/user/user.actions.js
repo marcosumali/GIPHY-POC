@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // API Key is stored on env file to be secured
 const GIPHY_API_KEY = process.env.REACT_APP_APIKEY
+const HTTP_REQUEST = 'https'
 
 // To handle store changes in form input during searching images
 export const handleChangesSearch = (e) => {
@@ -33,7 +34,7 @@ export const getGiphyImages = (e, searchInput) => {
 
     dispatch(setGiphyImagesLoadingStatus(true))
     
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8`)
+    axios.get(`${HTTP_REQUEST}://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8`)
       .then(response => {
         // console.log(response)
         dispatch(setGiphyImagesLoadingStatus(false))
@@ -92,14 +93,18 @@ export const handleImageFavourites = (imageId) => {
     // Validate imageId to array of favourite images
     // Push to the array if imageID is not found in the array of favourite images
     // Save to local storage afterwards
-    let imageIndex = favourites.indexOf(imageId)
-
-    if (imageIndex < 0) {
-      favourites.push(imageId)
+    if (favourites) {
+      let imageIndex = favourites.indexOf(imageId)
+      if (imageIndex < 0) {
+        favourites.push(imageId)
+      } else {
+        favourites.splice(imageIndex, 1)
+      }
     } else {
-      favourites.splice(imageIndex, 1)
+      favourites = []
+      favourites.push(imageId)
     }
-    
+
     storage.setItem('GE_favourites', JSON.stringify(favourites))
     dispatch(setImagesFavId(favourites))
   }
@@ -108,16 +113,20 @@ export const handleImageFavourites = (imageId) => {
 // To get image favourites from GIPHY APIs
 export const getGiphyImageFavourites = (imageIds) => {
   return (dispatch) => {
-
-    let GIPHY_Ids = imageIds.join(',')
-    axios.get(`http://api.giphy.com/v1/gifs?api_key=${GIPHY_API_KEY}&ids=${GIPHY_Ids}`)
-      .then(response => {
-        dispatch(setImagesFavLoadingStatus(false))
-        dispatch(setImagesFav(response.data.data))
-      })
-      .catch(err => {
-        console.log('ERROR: Get Fav Giphy Images', err)
-      })
+    if (imageIds.length > 0) {
+      let GIPHY_Ids = imageIds.join(',')
+      axios.get(`${HTTP_REQUEST}://api.giphy.com/v1/gifs?api_key=${GIPHY_API_KEY}&ids=${GIPHY_Ids}`)
+        .then(response => {
+          dispatch(setImagesFavLoadingStatus(false))
+          dispatch(setImagesFav(response.data.data))
+        })
+        .catch(err => {
+          console.log('ERROR: Get Fav Giphy Images', err)
+        })
+    } else {
+      dispatch(setImagesFavLoadingStatus(false))
+      dispatch(setImagesFav(imageIds))
+    }
   }
 }
 
@@ -143,7 +152,7 @@ export const fetchMoreGiphyImage = (e, searchInput, images) => {
     e.preventDefault()
     dispatch(setFetchMoreImagesLoadingStatus(true))
 
-    axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8&offset=${images.length}`)
+    axios.get(`${HTTP_REQUEST}://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8&offset=${images.length}`)
       .then(response => {
         // console.log(response)
         let newImages = [
