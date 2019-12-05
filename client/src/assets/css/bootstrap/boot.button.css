@@ -1,0 +1,5 @@
+.btn-primary {
+  min-width: 100px;
+  background-color: var(--main-bid) !important;
+  border-color: var(--main-bid) !important;
+}
