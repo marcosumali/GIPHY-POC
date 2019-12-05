@@ -33,7 +33,7 @@ export const getGiphyImages = (e, searchInput) => {
 
     dispatch(setGiphyImagesLoadingStatus(true))
     
-    axios.get(`https://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8`)
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8`)
       .then(response => {
         // console.log(response)
         dispatch(setGiphyImagesLoadingStatus(false))
@@ -110,7 +110,7 @@ export const getGiphyImageFavourites = (imageIds) => {
   return (dispatch) => {
 
     let GIPHY_Ids = imageIds.join(',')
-    axios.get(`https://api.giphy.com/v1/gifs?api_key=${GIPHY_API_KEY}&ids=${GIPHY_Ids}`)
+    axios.get(`http://api.giphy.com/v1/gifs?api_key=${GIPHY_API_KEY}&ids=${GIPHY_Ids}`)
       .then(response => {
         dispatch(setImagesFavLoadingStatus(false))
         dispatch(setImagesFav(response.data.data))
@@ -143,7 +143,7 @@ export const fetchMoreGiphyImage = (e, searchInput, images) => {
     e.preventDefault()
     dispatch(setFetchMoreImagesLoadingStatus(true))
 
-    axios.get(`https://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8&offset=${images.length}`)
+    axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchInput}&api_key=${GIPHY_API_KEY}&limit=8&offset=${images.length}`)
       .then(response => {
         // console.log(response)
         let newImages = [
