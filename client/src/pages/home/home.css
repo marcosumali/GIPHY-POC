@@ -1,0 +1,55 @@
+.navbar {
+  margin-bottom: 1em;
+}
+
+.Navbar-header {
+  font-size: 1.5em;
+  color: var(--main-bid);
+}
+
+.Center-cropped {
+  width: 100%;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.Image-border {
+  margin: 8px;
+}
+
+.Loading-box {
+  background-color: var(--main-black);
+  opacity: 0.5;
+  min-height: 50vh;
+  border-radius: 5px;
+}
+
+.Container-image {
+  position: relative;
+}
+
+.Position-bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.Image-heart {
+  height: 36px;
+  width: 36px;
+}
+
+.Image-heart-opaque-border > img {
+  display: none; 
+}
+
+.Image-heart-opaque {
+  height: 36px;
+  width: 36px;
+  opacity: 0.5;
+}
+
+.Image:hover + .Image-heart-opaque-border > img  { 
+  display: block;
+}
