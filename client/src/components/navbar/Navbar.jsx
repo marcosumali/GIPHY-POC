@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class NavbarComponent extends Component {
+class NavbarComponent extends Component {
   render() {
     return (
       <div>
@@ -13,7 +15,7 @@ export default class NavbarComponent extends Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="/">Search</Nav.Link>
-              <Nav.Link href="/favourites">Favourites</Nav.Link>
+              <Nav.Link href="/favourites">Favourites ({ this.props.favImagesId ? this.props.favImagesId.length : 0 })</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -21,3 +23,17 @@ export default class NavbarComponent extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    favImagesId: state.user.favImagesId,
+  }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch)
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (NavbarComponent);
+

@@ -36,10 +36,17 @@ class FavPage extends Component {
                 <LoadingSvg width="48px" height="48px" color="#ffffff"/>
               </Col>
               :
-              <Images 
-                images={ favImages }
-                favImagesId={ favImagesId }
-              />
+              <div>
+                {
+                  favImages.length > 0 ?
+                  <Images 
+                    images={ favImages }
+                    favImagesId={ favImagesId }
+                  />
+                  :
+                  <div className="Search-error">You don't have any favourite images.</div>
+                }
+              </div>
             }
           </Col>
         </Row>
@@ -47,6 +54,7 @@ class FavPage extends Component {
     )
   }
 }
+
 
 const mapStateToProps = (state) => {
   return {

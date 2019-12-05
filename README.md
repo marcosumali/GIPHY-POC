@@ -1,6 +1,9 @@
 ## GIPHY POC
 GIPHY POC is a proof of concept of web application that aggregates results from various image libraries e.g. GIPHY API. This repository is set up for maintaining documentation of the application development.
 
+### Published Website
+[GiphyPOC.com](https://giphy-apps.firebaseapp.com/)
+
 ### Tech Stack
 1. Front-end:
    * Single Page Framework: React JS
