@@ -8,7 +8,7 @@ GIPHY POC is a proof of concept of web application that aggregates results from 
 1. Front-end:
    * Single Page Framework: React JS
    * State Management: Redux
-   * UI Framework: Bootstrap
+   * UI Framework: Bootstrap  
    _Reason: Most popular framework for application development._
 
 ### Prerequisites Instructions
